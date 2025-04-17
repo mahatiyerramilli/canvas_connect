@@ -1,0 +1,35 @@
+{% extends "products/base.html" %}
+
+{% block title %}Feedback Report{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Feedback Report</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Author</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for feedback in feedbacks %}
+        <tr>
+            <td>{{ feedback.product.name }}</td>
+            <td>{{ feedback.author }}</td>
+            <td>
+                {% for i in "12345" %}
+                    {% if forloop.counter <= feedback.rating %}
+                        ★
+                    {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{ feedback.comment|truncatewords:10 }}</td>
+            <td>{{ feedback.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
